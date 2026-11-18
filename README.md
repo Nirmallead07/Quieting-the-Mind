@@ -14,6 +14,8 @@ The second part turns inward. Twenty short statements ask how the mind has been 
 
 The result brings the two parts together. For each area the person sees one mark for daily life and one for the mind, an area to give thanks for, and an area where the Lord may be inviting them to grow, with a passage from Scripture, a question for prayer and small steps for the coming weeks. They also learn how their overthinking usually shows itself, whether by replaying, seeking certainty or stepping back. When the cost is high, a note of care encourages them to speak with someone they trust, or with a counsellor or doctor. The self-check closes with a short personal intention.
 
+The self-check is available in English, Tamil (தமிழ்) and Sinhala (සිංහල). The person chooses a language on the opening screen, and the choice is remembered on their device.
+
 The tool is a mirror for reflection, not a validated psychological test or a diagnosis, and its results should not be used to compare or evaluate people.
 
 The whole tool is one file, `index.html`, with its watercolour illustrations built in. It runs in any phone or computer browser, even offline. Answers stay on the person's own device and are never sent anywhere, and a "Clear my answers" button removes everything.
