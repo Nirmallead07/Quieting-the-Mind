@@ -16,7 +16,7 @@ The result brings the two parts together. For each area the person sees one mark
 
 The tool is a mirror for reflection, not a validated psychological test or a diagnosis, and its results should not be used to compare or evaluate people.
 
-The whole tool is one file, `index.html`. It runs in any phone or computer browser. Answers stay on the person's own device and are never sent anywhere, and a "Clear my answers" button removes everything.
+The whole tool is one file, `index.html`, with its watercolour illustrations built in. It runs in any phone or computer browser, even offline. Answers stay on the person's own device and are never sent anywhere, and a "Clear my answers" button removes everything.
 
 ## About the developer
 
