@@ -5,7 +5,7 @@
 <meta name="color-scheme" content="light">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="author" content="Fr. Solomon Anthony Nirmalan, CMF">
-<meta name="description" content="A reflection on overthinking: how the mind replays the past, worries about the future, doubts decisions, reads other people and judges itself, with Scripture and small steps toward peace.">
+<meta name="description" content="A guided self-check on overthinking: how the mind replays the past, worries about the future, doubts decisions, reads other people and judges itself, with Scripture and small steps toward peace.">
 <title>Quieting the Mind</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;600&display=swap">
 <style>
@@ -357,10 +357,10 @@ function intro(msg){
     ${msg?`<p class="toast" role="status">${esc(msg)}</p>`:""}
     <div class="card">
       ${SCENE("intro")}
-      <span class="eyebrow">A reflection</span>
+      <span class="eyebrow">A guided self-check</span>
       <h1>Quieting the Mind</h1>
-      <p class="byline">A reflection by Fr. Solomon Anthony Nirmalan, CMF</p>
-      <p>Careful thinking is a gift. We prepare, we pray, we ask for advice, and we decide. Sometimes, though, the mind keeps going round the same thoughts long after they have stopped helping. This reflection helps you notice where that happens in your life, and offers Scripture and small steps toward peace.</p>
+      <p class="byline">Developed by Fr. Solomon Anthony Nirmalan, CMF</p>
+      <p>Careful thinking is a gift. We prepare, we pray, we ask for advice, and we decide. Sometimes, though, the mind keeps going round the same thoughts long after they have stopped helping. This self-check helps you notice where that happens in your life, and offers Scripture and small steps toward peace.</p>
       <p>It has two parts. In Part One you meet twenty everyday situations and choose what you would usually do. In Part Two you answer twenty-seven short statements about the past month.</p>
       <p>Choose the answer that is closest to what you really do, not what you think you should do. If none of the answers fits, you may choose "None of these describes me" and write a few words of your own.</p>
       <p class="verse">Search me, O God, and know my heart! Try me and know my thoughts!<cite>Psalm 139:23</cite></p>
@@ -369,10 +369,10 @@ function intro(msg){
     </div>
     <p class="note">This is a mirror for reflection, not a test or a diagnosis. No one sees your answers.</p>
     <details class="about">
-      <summary>About this reflection</summary>
+      <summary>About this self-check</summary>
       <div class="about-body">
         <p>Careful thinking is a gift. We prepare for what matters, pray over our choices, ask for advice and learn from our mistakes. Thinking turns into overthinking when it keeps going round the same ground, when it is driven by worry or distress, or when it begins to cost us sleep, peace and the freedom to act.</p>
-        <p>This reflection looks at five places where that often happens: going over the past, worrying about the future, doubting decisions, guessing what other people think, and judging ourselves too harshly. In Part One you meet everyday situations from home, work, parish and community life and choose what you would usually do. Part Two turns inward and asks how your mind has been over the past month, and what your thoughts have been costing you.</p>
+        <p>This self-check looks at five places where that often happens: going over the past, worrying about the future, doubting decisions, guessing what other people think, and judging ourselves too harshly. In Part One you meet everyday situations from home, work, parish and community life and choose what you would usually do. Part Two turns inward and asks how your mind has been over the past month, and what your thoughts have been costing you.</p>
         <p>At the end you see two marks for each area, one for daily life and one for your mind. You also see an area to give thanks for and an area where the Lord may be inviting you to grow, with a passage from Scripture, a question for prayer and a few small steps. The result also names the way your overthinking usually shows itself, whether by replaying, seeking certainty or stepping back.</p>
         <p>This is a mirror for reflection, not a psychological test or a diagnosis, and its results should not be used to compare people. If your thoughts are costing you sleep or peace, please speak with someone you trust, or with a counsellor or doctor. Nothing is sent anywhere. Your answers stay on your own phone, and you can clear them when you finish.</p>
       </div>
@@ -746,7 +746,7 @@ function result(){
   app.innerHTML = `
     <div class="card">
       ${SCENE("result")}
-      <span class="eyebrow">Your reflection</span>
+      <span class="eyebrow">Your results</span>
       <h1>Where your mind finds peace</h1>
       <p>Read this slowly. It is not a judgement or a diagnosis. It is only a light on where you are today.</p>
       <p class="note">For each area, the first mark shows what you do in daily life (Part One). The second shows what happens in your mind (Part Two). A longer bar means more freedom.</p>
