@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="light">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="author" content="Fr. Solomon Anthony Nirmalan, CMF">
+<meta name="description" content="A reflection on overthinking: how the mind replays the past, worries about the future, doubts decisions, reads other people and judges itself, with Scripture and small steps toward peace.">
+<title>Quieting the Mind</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+/* Layout: one calm card per screen, centred column, progress thread across the top */
+:root{
+  --bg:#FAF0D2; --surface:#FFFAEB; --ink:#3A2A1D; --muted:#76604D;
+  --line:#E6D3A8; --accent:#7A4A2B; --accent-soft:#F2E0BC; --gold:#A8732A;
+  --display:"Spectral", Georgia, "Times New Roman", serif;
+  --body:"Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  color-scheme:light;
+}
+
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  padding-top:calc(24px + env(safe-area-inset-top, 0px));padding-bottom:calc(48px + env(safe-area-inset-bottom, 0px))}
+[hidden]{display:none!important}
+.wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+h1,h2,h3{font-family:var(--display);font-weight:600;text-wrap:balance;margin:0;line-height:1.2}
+h1{font-size:2.1rem}
+h2{font-size:1.45rem}
+h3{font-size:1.15rem}
+p{margin:0}
+.eyebrow{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.byline{font-size:.95rem;color:var(--muted)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px 20px;display:flex;flex-direction:column;gap:16px}
+.verse{font-family:var(--display);font-style:italic;font-size:1.1rem;color:var(--muted);border-left:2px solid var(--gold);padding-left:14px}
+.verse cite{display:block;font-style:normal;font-size:.85rem;margin-top:4px;font-family:var(--body)}
+.meta{color:var(--muted);font-size:.95rem}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--accent);color:var(--surface);border:0;border-radius:999px;padding:12px 22px;font-weight:600;align-self:flex-start}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.btn:focus-visible,.opt:focus-visible,.link:focus-visible,.none-opt:focus-visible,textarea:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.link{background:none;border:0;color:var(--muted);padding:6px 0;text-decoration:underline}
+
+.progress{display:flex;flex-direction:column;gap:8px}
+.track{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.fill{height:100%;background:var(--accent);transition:width .35s ease}
+.step{display:flex;justify-content:space-between;font-size:.85rem;color:var(--muted)}
+.vowtag{color:var(--gold);font-weight:600}
+
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{text-align:left;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:14px 16px;line-height:1.4;transition:border-color .2s,background .2s}
+.opt:hover{border-color:var(--accent)}
+.opt.picked{border-color:var(--accent);background:var(--accent-soft)}
+.none-opt{background:none;border:0;border-top:1px dashed var(--line);color:var(--muted);text-align:left;padding:12px 2px 2px;font-size:.95rem}
+.none-opt.picked{color:var(--accent);font-weight:600}
+.notebox{display:flex;flex-direction:column;gap:10px}
+
+.bars{display:flex;flex-direction:column;gap:14px}
+.bar-head{display:flex;justify-content:space-between;gap:8px;font-size:.95rem;flex-wrap:wrap}
+.bar-head b{font-family:var(--display);font-size:1.05rem}
+.bar-head span{color:var(--muted)}
+.bar{height:8px;background:var(--line);border-radius:8px;overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:8px}
+.bar.gold i{background:var(--gold)}
+.unscored{font-size:.92rem;font-style:italic;color:var(--muted);margin-top:4px}
+.root-note{font-size:.95rem;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+.pill{display:inline-block;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:600;align-self:flex-start}
+.pill.gold{color:var(--gold)}
+ul.plain{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.words{display:flex;flex-direction:column;gap:14px}
+.words div{display:flex;flex-direction:column;gap:4px}
+.words .q{font-size:.92rem;color:var(--muted)}
+.words .a{font-family:var(--display);font-style:italic}
+label{font-weight:600;font-size:.95rem}
+textarea{font:inherit;width:100%;box-sizing:border-box;min-height:64px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg);color:var(--ink);resize:vertical}
+.field{display:flex;flex-direction:column;gap:6px}
+.note{font-size:.88rem;color:var(--muted)}
+.toast{font-size:.9rem;color:var(--accent)}
+.credit{max-width:560px;margin:32px auto 0;padding-top:16px;border-top:1px solid var(--line);text-align:center;font-size:.88rem;color:var(--muted)}
+.credit b{font-family:var(--display);font-weight:600;color:var(--ink)}
+.about{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:0 20px}
+.about summary{cursor:pointer;padding:16px 0;font-family:var(--display);font-weight:600;font-size:1.1rem;list-style-position:inside}
+.about summary:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.about .about-body{display:flex;flex-direction:column;gap:12px;padding-bottom:20px}
+.about .dev-name{font-family:var(--display);font-weight:600;font-size:1.05rem}
+.about .langs{font-size:.92rem;color:var(--muted)}
+.area{display:flex;flex-direction:column;gap:8px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.area:last-child{border-bottom:0;padding-bottom:0}
+.area-name{font-family:var(--display);font-size:1.1rem}
+.sub-head{display:flex;justify-content:space-between;gap:8px;font-size:.9rem;color:var(--muted);flex-wrap:wrap}
+.opts.scale{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opts.scale .opt{text-align:center}
+.clear-card{background:transparent}
+@media (prefers-reduced-motion: reduce){.fill,.opt{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<footer class="credit">Prepared by <b>Fr. Solomon Anthony Nirmalan, CMF</b></footer>
+
+<script>
+/* ---------- Who is answering ---------- */
+let who = null;     // "rel" (religious sister) or "lay"
+let church = null;  // "cath" or "other"
+
+// A text can be a plain string, {r, l} for religious/lay, or {c, o} for Catholic/other Christian.
+function T(x){
+  if(typeof x==="string") return x;
+  if(x.r!==undefined || x.l!==undefined) return T(who==="rel" ? x.r : x.l);
+  if(x.c!==undefined || x.o!==undefined) return T(church==="other" ? x.o : x.c);
+  return "";
+}
+
+/* ---------- Areas ---------- */
+const ORDER = ["A","B","C","D","E"];
+const AREAS = {
+  A:{name:"Letting go of yesterday", tag:"The past",
+     verse:"Remember not the former things, nor consider the things of old. Behold, I am doing a new thing.", ref:"Isaiah 43:18-19",
+     gift:"You seem able to learn from the past and then let it rest. Thank God for this freedom, and ask him to help you offer it to someone who is still stuck in an old hurt.",
+     grow:"The Lord may be inviting you to stop living yesterday again, and to trust that what has been forgiven and learned can now be left with him.",
+     question:"What am I still carrying that the Lord has already made new?",
+     steps:[
+       "When a replay begins, ask \"What is one thing I can do about this now?\" instead of \"Why did this happen?\"",
+       {r:"When it comes during the day, tell yourself \"not now\" and save it for the evening Examen.",
+        l:"When it comes during the day, tell yourself \"not now\" and save it for a short prayer at the end of the day."},
+       "At the end of that prayer, write down one thing you are handing over to God, and close the notebook."]},
+  B:{name:"Trusting tomorrow", tag:"The future",
+     verse:"Do not be anxious about tomorrow, for tomorrow will be anxious for itself. Let the day's own trouble be sufficient for the day.", ref:"Matthew 6:34",
+     gift:"You seem able to plan for the future and still live today in peace. Thank God for this trust, and let it steady the people around you.",
+     grow:"The Lord may be inviting you to do today's part well and leave tomorrow's part with him.",
+     question:"Which worry am I carrying today that belongs to tomorrow?",
+     steps:[
+       "Keep a 15-minute worry and prayer time each day. Write the worries down, pray over the list, then put it away until the next day.",
+       "For each worry, ask \"Can I act on this today?\" If yes, take one small step. If not, offer it to God.",
+       "Use a breath prayer such as \"Jesus, I trust in you,\" breathing out more slowly than you breathe in."]},
+  C:{name:"Choosing with freedom", tag:"Decisions",
+     verse:"He who observes the wind will not sow; and he who regards the clouds will not reap.", ref:"Ecclesiastes 11:4",
+     gift:"You seem able to decide with care and then rest in your decision. Thank God for this freedom of heart.",
+     grow:"The Lord may be inviting you to choose with the light you have, and to trust him with what you cannot know.",
+     question:"Where am I waiting for perfect certainty before I act?",
+     steps:[
+       "Give small decisions a time limit, such as ten minutes, and accept \"good enough\".",
+       "When you need advice, ask one person once, and then decide.",
+       "For big decisions, follow St Ignatius: do not reverse a decision made in peace during a time of desolation."]},
+  D:{name:"Reading hearts gently", tag:"Other people",
+     verse:"Love bears all things, believes all things, hopes all things, endures all things.", ref:"1 Corinthians 13:7",
+     gift:{r:"You seem to give others the benefit of the doubt. Thank God for this generous way of seeing, which makes community life lighter.",
+           l:"You seem to give others the benefit of the doubt. Thank God for this generous way of seeing, which makes family and work life lighter."},
+     grow:"The Lord may be inviting you to stop guessing what others think, and to ask simply, or to trust.",
+     question:"Whose words or silence have I been interpreting without asking?",
+     steps:[
+       "When you catch yourself guessing, write two short lists: \"What do I know?\" and \"What am I guessing?\"",
+       "Think of three other reasons for the person's behaviour. St Ignatius asks us to put a good interpretation on what others say.",
+       "If it still matters, ask the person directly and kindly: \"Are we alright?\""]},
+  E:{name:"Resting in God's mercy", tag:"Conscience",
+     verse:"Whenever our hearts condemn us, God is greater than our hearts, and he knows everything.", ref:"1 John 3:20",
+     gift:"You seem able to own your faults and then accept forgiveness. Thank God for this peace of conscience.",
+     grow:"The Lord may be inviting you to let his mercy be enough, and to treat yourself with the patience he shows you.",
+     question:"Do I believe God's mercy is bigger than my doubts?",
+     steps:[
+       {c:"Keep one regular confessor and follow his guidance rather than your own doubts.",
+        o:"Keep one pastor or mentor you trust, and follow their guidance rather than your own doubts."},
+       "If you are not sure something was a sin, treat it as not a sin.",
+       {r:"Speak to yourself as you would speak to a younger sister who made the same slip.",
+        l:"Speak to yourself as you would speak to a good friend who made the same slip."}]}
+};
+
+/* ---------- Response types ---------- */
+// C constructive, N normal reflection, R repetitive, S reassurance/checking, V avoidance
+const TYPE_SCORE = {C:3, N:2, R:1, S:0, V:0};
+
+const PATTERNS = {
+  R:{name:"Replaying", desc:"When your mind gets busy, you tend to go over things again and again.",
+     verse:"Whatever is true, whatever is honourable, whatever is just, whatever is pure... think about these things.", ref:"Philippians 4:8",
+     steps:["Turn \"Why?\" into \"What now?\"",
+            "Save the replay for a set time of prayer, and say \"not now\" when it comes earlier.",
+            "Break the loop with your body: a short walk, or a task with your hands."]},
+  S:{name:"Seeking certainty", desc:"When your mind gets busy, you tend to look for reassurance or check again.",
+     verse:"Trust in the Lord with all your heart, and do not rely on your own insight.", ref:"Proverbs 3:5",
+     steps:["Ask once, from one person, and then stop.",
+            "When the urge to check comes, wait ten minutes before acting on it.",
+            "Agree with yourself on one check for each task, and then it is done."]},
+  V:{name:"Stepping back", desc:"When your mind gets busy, you tend to put things off or keep away.",
+     verse:"Fear not, for I am with you.", ref:"Isaiah 41:10",
+     steps:["Take the smallest first step today, for five minutes only.",
+            "Do the task you are avoiding beside someone else.",
+            "Name the fear to God in one sentence, and then take the step."]}
+};
+
+/* ---------- Part One: situations ---------- */
+const QUESTIONS = [
+  // A. The past
+  {v:"A", q:{r:"At recreation you made a joke, and one sister looked hurt. That night, what do you do?",
+             l:"At a family gathering you made a joke, and one person looked hurt. That night, what do you do?"}, o:[
+    [{r:"I decide to have a quiet word with her tomorrow, and then I sleep.", l:"I decide to have a quiet word with them tomorrow, and then I sleep."},"C"],
+    ["I feel uneasy for a while and think about what I said, then it settles.","N"],
+    [{r:"I lie awake going over her face and what I should have said instead.", l:"I lie awake going over their face and what I should have said instead."},"R"],
+    [{r:"I feel so awkward that I keep away from her for the next few days.", l:"I feel so awkward that I keep away from them for the next few days."},"V"]]},
+  {v:"A", q:{r:"In a community meeting, an idea you cared about was turned down. Over the next few days, what do you do?",
+             l:"In a meeting at work or in the parish, an idea you cared about was turned down. Over the next few days, what do you do?"}, o:[
+    ["I ask myself honestly whether there is something to learn, and then I move on.","C"],
+    ["I feel disappointed for a day or two, and then it passes.","N"],
+    ["I keep rehearsing what I said and what I will say next time.","R"],
+    ["I ask several people whether my idea was really so bad.","S"]]},
+  {v:"A", q:"A mistake you made years ago, which you have already dealt with, comes back to your mind. What do you do?", o:[
+    ["I remember that I have made peace with it, and I return to what I was doing.","C"],
+    ["I feel a sting, say a short prayer, and let it pass.","N"],
+    ["I go back into the whole story and feel the shame again as if it were new.","R"],
+    ["I quickly busy myself or reach for my phone so I don't have to feel it.","V"]]},
+  {v:"A", q:{r:"A sister apologises for something that hurt you. What do you do?",
+             l:"A friend or family member apologises for something that hurt you. What do you do?"}, o:[
+    ["I accept the apology and let the matter rest.","C"],
+    ["I forgive, though the memory still comes back now and then.","N"],
+    ["I keep asking others whether I was right to feel so hurt.","S"],
+    ["I say I forgive, but I keep my distance so it can't happen again.","V"]]},
+  // B. The future
+  {v:"B", q:{r:"You are told that next year you will take charge of a school. What do you do?",
+             l:"You are told that next month you will lead a new team or project at work. What do you do?"}, o:[
+    ["I make a simple plan, ask someone experienced for advice, and take one step at a time.","C"],
+    ["I feel anxious at first, and it settles as I start to prepare.","N"],
+    ["I picture everything that could go wrong, and it fills my nights.","R"],
+    ["I keep putting off any planning, because thinking about it makes me tense.","V"]]},
+  {v:"B", q:"Someone you love is waiting for medical test results, due next week. What do you do?", o:[
+    ["I pray, do what I can to support them, and leave the rest to God.","C"],
+    ["I feel concerned and pray often, but I still manage my daily work.","N"],
+    ["I keep imagining the worst result, as if it had already happened.","R"],
+    ["I search the internet again and again for what the results might mean.","S"]]},
+  {v:"B", q:{r:"Tomorrow is the provincial's visitation, and you have prepared well. What do you do the night before?",
+             l:"Tomorrow you have a job interview, an exam or an important presentation, and you have prepared well. What do you do the night before?"}, o:[
+    ["I go through the main points once more, and then I rest.","C"],
+    ["I feel nervous, remind myself that I am prepared, and sleep.","N"],
+    ["I get up again and again to check details that are already in order.","S"],
+    ["I can't bring myself to look at it, and I scroll on my phone until late.","V"]]},
+  {v:"B", q:{r:"The superior says, \"Please come and see me tomorrow,\" and gives no reason. What do you do?",
+             l:"Your boss says, \"Please come and see me tomorrow,\" and gives no reason. What do you do?"}, o:[
+    ["I wonder briefly what it is about, and carry on with my evening.","C"],
+    ["I think through one or two possible reasons, and then leave it.","N"],
+    ["I spend the evening going over everything I might have done wrong.","R"],
+    [{r:"I ask a sister several times what she thinks it might be about.", l:"I ask a colleague several times what they think it might be about."},"S"]]},
+  // C. Decisions
+  {v:"C", q:{r:"You need a small gift for a sister's jubilee. What do you do?",
+             l:"You need a small birthday gift for a friend. What do you do?"}, o:[
+    [{r:"I choose something I think she will like, and that is that.", l:"I choose something I think they will like, and that is that."},"C"],
+    ["I compare a few things for a while, and then decide.","N"],
+    [{r:"I keep asking different sisters which one to buy.", l:"I keep asking different friends which one to buy."},"S"],
+    ["I keep putting it off until it is too late to choose well.","V"]]},
+  {v:"C", q:{r:"You need to reply to a delicate message from a parent at the school. What do you do?",
+             l:"You need to reply to a delicate message from a colleague or a relative. What do you do?"}, o:[
+    ["I write it carefully, ask one person I trust to read it, and send it.","C"],
+    ["I write it, read it through once or twice, and send it.","N"],
+    ["I rewrite it many times, asking different people, and still feel unsure.","S"],
+    ["I keep leaving the reply for later, because I'm afraid of saying the wrong thing.","V"]]},
+  {v:"C", q:{r:"You are offered a choice between two missions, and you have two weeks to decide. What do you do?",
+             l:"You must choose between two jobs, two courses or two places to live, and you have two weeks to decide. What do you do?"}, o:[
+    [{r:"I pray, talk it over with my spiritual director, and decide within the time.", l:"I pray, talk it over with someone wise I trust, and decide within the time."},"C"],
+    ["I need most of the two weeks, but I decide and feel at peace.","N"],
+    ["I make long lists, go round in circles, and doubt whichever way I lean.","R"],
+    ["I keep waiting for a clearer sign until the deadline passes or someone decides for me.","V"]]},
+  {v:"C", q:"A plan you made has now been carried out, and it went reasonably well. What do you do?", o:[
+    ["I note one lesson for next time and move on.","C"],
+    ["I think back over it for a little while, then let it go.","N"],
+    ["I keep wondering whether the other option would have been better.","R"],
+    ["I keep asking people whether I made the right choice.","S"]]},
+  // D. Other people
+  {v:"D", q:{r:"A sister passes you in the corridor without greeting you. What do you do?",
+             l:"A colleague or neighbour passes you without greeting you. What do you do?"}, o:[
+    [{r:"I assume she is busy or has something on her mind.", l:"I assume they are busy or have something on their mind."},"C"],
+    ["I wonder for a moment if I did something, then let it go.","N"],
+    ["I spend the day trying to work out what I did wrong.","R"],
+    [{r:"I ask someone else whether she is upset with me.", l:"I ask someone else whether that person is upset with me."},"S"]]},
+  {v:"D", q:"A message you sent shows \"seen\", but there is no reply after several hours. What do you do?", o:[
+    ["I assume the person is busy and get on with my day.","C"],
+    ["I feel a little uneasy, but I carry on with my work.","N"],
+    ["I read my message again and again, looking for what was wrong in it.","R"],
+    ["I hold back from contacting that person again until they reach out first.","V"]]},
+  {v:"D", q:{r:"You had a short conversation with the parish priest about your work. Afterwards, what do you do?",
+             l:"You had a short conversation with your boss, or an elder in the family, about something you did. Afterwards, what do you do?"}, o:[
+    ["I take the words as they were said.","C"],
+    ["I think over one or two points that matter, and then leave it.","N"],
+    ["I replay the words and the tone, looking for what was really meant.","R"],
+    [{r:"I ask a sister what she thinks was really meant.", l:"I ask someone what they think was really meant."},"S"]]},
+  {v:"D", q:{r:"You gave the reflection at community prayer. Afterwards, what do you do?",
+             l:"You gave a presentation at work or a short speech at a family event. Afterwards, what do you do?"}, o:[
+    ["I leave it there, perhaps noting one thing to do better next time.","C"],
+    ["I ask one person how it went, and accept what they say.","N"],
+    ["I keep asking different people whether it was alright.","S"],
+    ["I decide to avoid speaking in front of others next time if I can.","V"]]},
+  // E. Conscience
+  {v:"E", q:{c:"Some days after Confession, a sin you have already confessed comes back to your mind. What do you do?",
+             o:"Some days after asking God's forgiveness for something, it comes back to your mind. What do you do?"}, o:[
+    ["I remember that it has been forgiven, thank God, and carry on with my day.","C"],
+    ["I feel some regret, and it reminds me to take care in that area.","N"],
+    ["I go over it again and wonder whether I explained it properly.","R"],
+    [{c:"I can't feel at peace until I confess it again or ask a priest whether I am truly forgiven.",
+      o:"I can't feel at peace until I ask God again, or ask someone, whether I am truly forgiven."},"S"]]},
+  {v:"E", q:{c:"During Mass or personal prayer, an unwanted or embarrassing thought comes into your mind. What do you do?",
+             o:"During worship or personal prayer, an unwanted or embarrassing thought comes into your mind. What do you do?"}, o:[
+    ["I notice it, let it pass, and bring my attention back as often as needed.","C"],
+    ["I feel a little unsettled, and it takes a moment to settle back into prayer.","N"],
+    ["I try hard to push it out, but it keeps coming back and I lose my prayer.","R"],
+    [{c:"I worry that having such a thought is a sin, and feel I must confess it.",
+      o:"I worry that having such a thought is a sin, and feel I must ask forgiveness for it again and again."},"S"]]},
+  {v:"E", q:{r:"You spoke impatiently to a student or a sister. Afterwards, what do you do?",
+             l:"You spoke impatiently to your child, your spouse or a co-worker. Afterwards, what do you do?"}, o:[
+    ["I admit I was impatient, apologise, and think how to handle it better next time.","C"],
+    ["I feel bad about it that evening, and make a point of being kind the next day.","N"],
+    ["I keep asking myself why I behaved like that and what kind of person I am.","R"],
+    ["I feel so ashamed that I avoid that person for a while instead of facing them.","V"]]},
+  {v:"E", q:{r:"You have finished the monthly accounts, and they balance. It is late. What do you do?",
+             l:"You have finished the household budget or a report for work, and the figures add up. It is late. What do you do?"}, o:[
+    ["I check the totals once and put it away.","C"],
+    ["I go over a few entries again, then stop and rest.","N"],
+    ["I check it again and again in case I missed a mistake.","S"],
+    ["I leave it unsubmitted for days because I can't feel sure it is right.","V"]]},
+  // Unscored
+  {v:"A", check:true, q:"When your mind won't stop, is there someone you can tell?",
+   note:"This answer is not part of your result. It is only for you, and for your prayer.", o:[
+    ["Yes, I have someone.",0],["Sometimes.",1],["Rarely.",2],["No one.",3]]}
+];
+
+/* ---------- Part Two: statements ---------- */
+const FAITH = [
+  {v:"A", q:"The same thoughts about past events go round in my head.", k:"-"},
+  {v:"B", q:"Once I have done what I can about a problem, I can stop thinking about it.", k:"+"},
+  {v:"C", q:"Small decisions take me much longer than they should.", k:"-"},
+  {v:"D", q:"I go over what others might be thinking about me.", k:"-"},
+  {v:"E", q:"I worry that I have done wrong even when I have no clear reason to think so.", k:"-"},
+  {v:"A", q:"When I think about a mistake, I can learn from it and move on.", k:"+"},
+  {v:"B", q:"I picture the worst thing that could happen, even when it is unlikely.", k:"-"},
+  {v:"C", q:"I ask others for reassurance about the same thing, even after they have already reassured me.", k:"-"},
+  {v:"D", q:"I read hidden meanings into what people say, or don't say.", k:"-"},
+  {v:"E", q:{c:"I keep going back to whether a confession was complete.", o:"I keep going back to whether I have truly been forgiven."}, k:"-"},
+  {v:"A", q:"I ask myself \"Why did this happen?\" or \"Why am I like this?\" over and over.", k:"-"},
+  {v:"B", q:"Worry stops me from enjoying good moments.", k:"-"},
+  {v:"C", q:"Once I decide something, I can stay with it in peace.", k:"+"},
+  {v:"D", q:"When someone seems upset, I ask them simply instead of guessing.", k:"+"},
+  {v:"E", q:{c:"I believe God has forgiven what I have confessed.", o:"I believe God has forgiven what I have asked forgiveness for."}, k:"+"},
+  {v:"A", q:"I can put a past hurt into God's hands and leave it there.", k:"+"},
+  {v:"B", q:"I can plan for the future without my mind running ahead to everything that could go wrong.", k:"+"},
+  {v:"C", q:"I put off decisions or tasks because I am afraid of getting them wrong.", k:"-"},
+  {v:"D", q:{r:"I trust that my sisters wish me well, even when they are short with me.", l:"I trust that the people close to me wish me well, even when they are short with me."}, k:"+"},
+  {v:"E", q:"When something I do is not perfect, I feel I have failed.", k:"-"},
+  // What it costs me (scored separately; higher = more cost)
+  {cost:true, q:"My thoughts keep me from falling asleep, or wake me at night."},
+  {cost:true, q:"My mind is so busy that it is hard to be present in prayer, at work or with people."},
+  {cost:true, q:"I feel tension in my body, such as in my head, neck or stomach, when my mind is busy."},
+  {cost:true, q:"I feel tired even when I have not done much."},
+  // Honesty check
+  {honesty:true, q:"I have never once worried about anything.", o:[["Yes",1],["No",0]]},
+  {honesty:true, q:"I have never replayed a conversation in my head.", o:[["Yes",1],["No",0]]},
+  {honesty:true, q:"I have never doubted a decision after making it.", o:[["Yes",1],["No",0]]}
+];
+const FREQ = ["Never","Sometimes","Often","Always"];
+
+const N = QUESTIONS.length;
+const F = FAITH.length;
+const app = document.getElementById("app");
+let i = 0, j = 0;
+let answers = new Array(N).fill(null);  // index into the ORIGINAL options, or "none"
+let notes = new Array(N).fill("");
+let fans = new Array(F).fill(null);     // number = option index, "skip" = skipped
+
+// Shuffle option order once per visit, so the healthy answer is never in a fixed place.
+function shuffled(n){
+  const a=[...Array(n).keys()];
+  for(let k=n-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[a[k],a[r]]=[a[r],a[k]];}
+  return a;
+}
+const optOrder = QUESTIONS.map(q=>q.check ? [...Array(q.o.length).keys()] : shuffled(q.o.length));
+
+const store = {
+  get(k){try{return localStorage.getItem(k)}catch(e){return null}},
+  set(k,v){try{localStorage.setItem(k,v)}catch(e){}},
+  del(k){try{localStorage.removeItem(k)}catch(e){}}
+};
+
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]))}
+
+/* ---------- Screens ---------- */
+function intro(msg){
+  app.innerHTML = `
+    ${msg?`<p class="toast" role="status">${esc(msg)}</p>`:""}
+    <div class="card">
+      <span class="eyebrow">A reflection</span>
+      <h1>Quieting the Mind</h1>
+      <p class="byline">A reflection by Fr. Solomon Anthony Nirmalan, CMF</p>
+      <p>Careful thinking is a gift. We prepare, we pray, we ask for advice, and we decide. Sometimes, though, the mind keeps going round the same thoughts long after they have stopped helping. This reflection helps you notice where that happens in your life, and offers Scripture and small steps toward peace.</p>
+      <p>It has two parts. In Part One you meet twenty everyday situations and choose what you would usually do. In Part Two you answer twenty-seven short statements about the past month.</p>
+      <p>Choose the answer that is closest to what you really do, not what you think you should do. If none of the answers fits, you may choose "None of these describes me" and write a few words of your own.</p>
+      <p class="verse">Search me, O God, and know my heart! Try me and know my thoughts!<cite>Psalm 139:23</cite></p>
+      <p class="meta">Two parts · about 20 minutes · your answers stay on this phone</p>
+      <button class="btn" id="start">Begin</button>
+    </div>
+    <p class="note">This is a mirror for reflection, not a test or a diagnosis. No one sees your answers.</p>
+    <details class="about">
+      <summary>About this reflection</summary>
+      <div class="about-body">
+        <p>Quieting the Mind is a companion to Living My Vows. It looks at five places where overthinking often shows up: going over the past, worrying about the future, doubting decisions, guessing what other people think, and judging ourselves too harshly.</p>
+        <p>Thinking carefully, preparing well, praying and asking for advice are all healthy. They become overthinking only when they go on and on, are driven by distress, or get in the way of daily life. The situations and answers were written to respect that difference.</p>
+        <p>At the end you see two marks for each area, one for what you do in daily life and one for what happens in your mind. You also see an area to give thanks for, an area where the Lord may be inviting you to grow, the way your overthinking usually shows itself, and a few small steps for the coming weeks.</p>
+        <p>The reflection is not a validated psychological test, and its results should not be used to compare or evaluate people. If your thoughts are costing you sleep or peace, please speak with someone you trust, or with a counsellor or doctor. Nothing is sent anywhere. Your answers stay only on your own phone, and you can clear them when you finish.</p>
+      </div>
+    </details>
+    <details class="about">
+      <summary>About the developer</summary>
+      <div class="about-body">
+        <p class="dev-name">Fr. Solomon Anthony Nirmalan, CMF</p>
+        <p>Fr. Solomon Anthony Nirmalan, CMF, is a Claretian Missionary priest with 15 years of ministry and a behavioural researcher. He is currently pursuing a Master of Arts in Behavioural Sciences, Track in Organizational and Social Systems Development, at De La Salle University. He holds bachelor's degrees in Philosophy and Theology from the National Seminary of Sri Lanka, affiliated with the Pontifical Urbaniana University in Rome.</p>
+        <p>Leadership is at the centre of his work. He studies how leaders shape organizations and communities, and his thesis focuses on transformative leadership. His research is guided by theoretical pluralism: drawing on several behavioural frameworks together to understand how people make decisions and adapt.</p>
+        <p>He works in applied behavioural science, organizational and leadership dynamics, and environmental psychology, using mixed methods to turn theoretical models into practical tools with real-world impact. His wider interests include community development, socio-economic welfare, social and institutional change, and social justice for marginalized communities.</p>
+        <p class="langs">He is fluent in Tamil, Sinhala and English.</p>
+      </div>
+    </details>`;
+  document.getElementById("start").onclick = chooseWho;
+  window.scrollTo(0,0);
+}
+
+function chooseWho(){
+  app.innerHTML = `
+    <div class="card">
+      <span class="eyebrow">Before you begin</span>
+      <h2>Which describes you?</h2>
+      <p class="note">The situations will be worded to fit your life. The reflection is the same for everyone.</p>
+      <div class="opts">
+        <button class="opt${who==="rel"?" picked":""}" id="w-rel">I am a religious sister</button>
+        <button class="opt${who==="lay"?" picked":""}" id="w-lay">I am a lay person</button>
+      </div>
+    </div>
+    <div class="row"><button class="link" id="back">Back</button></div>`;
+  document.getElementById("w-rel").onclick=()=>{who="rel";church="cath";i=0;question();};
+  document.getElementById("w-lay").onclick=()=>{who="lay";chooseChurch();};
+  document.getElementById("back").onclick=()=>intro();
+  window.scrollTo(0,0);
+}
+
+function chooseChurch(){
+  app.innerHTML = `
+    <div class="card">
+      <span class="eyebrow">Before you begin</span>
+      <h2>Which describes you?</h2>
+      <p class="note">A few situations about prayer and forgiveness will be worded to fit your practice.</p>
+      <div class="opts">
+        <button class="opt${church==="cath"?" picked":""}" id="c-cath">I am Catholic</button>
+        <button class="opt${church==="other"?" picked":""}" id="c-other">I belong to another Christian church</button>
+      </div>
+    </div>
+    <div class="row"><button class="link" id="back">Back</button></div>`;
+  document.getElementById("c-cath").onclick=()=>{church="cath";i=0;question();};
+  document.getElementById("c-other").onclick=()=>{church="other";i=0;question();};
+  document.getElementById("back").onclick=chooseWho;
+  window.scrollTo(0,0);
+}
+
+function next(){
+  if(i<N-1){i++;question();} else partTwo();
+}
+
+function question(){
+  const item = QUESTIONS[i], pct = Math.round(i/(N+F)*100);
+  const isNone = answers[i]==="none";
+  const order = optOrder[i];
+  app.innerHTML = `
+    <div class="progress">
+      <div class="step"><span class="vowtag">${item.check?"A quiet check-in":AREAS[item.v].tag}</span><span>Part One · ${i+1} of ${N}</span></div>
+      <div class="track"><div class="fill" style="width:${pct}%"></div></div>
+    </div>
+    <div class="card">
+      <h2>${esc(T(item.q))}</h2>
+      ${item.note?`<p class="note">${esc(item.note)}</p>`:""}
+      <div class="opts">${order.map(k=>`<button class="opt${answers[i]===k?" picked":""}" data-k="${k}">${esc(T(item.o[k][0]))}</button>`).join("")}</div>
+      ${item.check?"":`<button class="none-opt${isNone?" picked":""}" id="none-${i}">None of these describes me</button>
+      <div class="notebox" id="notebox"${isNone?"":" hidden"}>
+        <label for="note-${i}">In a few words, what would you do? (optional)</label>
+        <textarea id="note-${i}" placeholder="Write it as you would say it to the Lord">${esc(notes[i])}</textarea>
+        <button class="btn" id="cont">Continue</button>
+      </div>`}
+    </div>
+    <div class="row"><button class="link" id="back">Back</button></div>`;
+  app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+    answers[i]=+b.dataset.k; notes[i]="";
+    app.querySelectorAll(".opt").forEach(x=>x.classList.remove("picked"));
+    b.classList.add("picked");
+    setTimeout(next,220);
+  });
+  if(!item.check){
+    document.getElementById("none-"+i).onclick=()=>{
+      answers[i]="none";
+      app.querySelectorAll(".opt").forEach(x=>x.classList.remove("picked"));
+      document.getElementById("none-"+i).classList.add("picked");
+      document.getElementById("notebox").hidden=false;
+      document.getElementById("note-"+i).focus();
+    };
+    document.getElementById("cont").onclick=()=>{
+      notes[i]=document.getElementById("note-"+i).value.trim();
+      next();
+    };
+  }
+  document.getElementById("back").onclick=()=>{
+    if(i>0){i--;question();}
+    else if(who==="lay") chooseChurch(); else chooseWho();
+  };
+  window.scrollTo(0,0);
+}
+
+function partTwo(){
+  app.innerHTML = `
+    <div class="progress">
+      <div class="step"><span class="vowtag">Part Two</span><span>${F} short statements</span></div>
+      <div class="track"><div class="fill" style="width:${Math.round(N/(N+F)*100)}%"></div></div>
+    </div>
+    <div class="card">
+      <span class="eyebrow">Part Two</span>
+      <h1>In my mind</h1>
+      <p>Part One looked at what you do in everyday situations. Part Two looks at what happens inside: the thoughts that come and go, or come and stay.</p>
+      <p>Think of the past month. Answer as you really are, not as you would like to be. No one will see these answers.</p>
+      <p class="verse">When the cares of my heart are many, your consolations cheer my soul.<cite>Psalm 94:19</cite></p>
+      <p class="meta">${F} short statements · about 5 minutes</p>
+      <button class="btn" id="p2start">Begin Part Two</button>
+    </div>
+    <div class="row"><button class="link" id="back">Back</button></div>`;
+  document.getElementById("p2start").onclick=()=>{j=0;fquestion();};
+  document.getElementById("back").onclick=()=>{i=N-1;question();};
+  window.scrollTo(0,0);
+}
+
+function fnext(){
+  if(j<F-1){j++;fquestion();} else result();
+}
+
+function fquestion(){
+  const item = FAITH[j], pct = Math.round((N+j)/(N+F)*100);
+  const labels = item.o ? item.o.map(o=>o[0]) : FREQ;
+  const tag = item.honesty ? "Honesty check" : item.cost ? "What it costs me" : AREAS[item.v].tag;
+  app.innerHTML = `
+    <div class="progress">
+      <div class="step"><span class="vowtag">${tag}</span><span>Part Two · ${j+1} of ${F}</span></div>
+      <div class="track"><div class="fill" style="width:${pct}%"></div></div>
+    </div>
+    <div class="card">
+      ${item.honesty?`<p class="note">Answer simply, yes or no.</p>`:`<p class="note">In the past month...</p>`}
+      <h2>${esc(T(item.q))}</h2>
+      <div class="opts${item.o?"":" scale"}">${labels.map((l,k)=>`<button class="opt${fans[j]===k?" picked":""}" data-k="${k}">${esc(l)}</button>`).join("")}</div>
+      ${item.honesty?"":`<button class="none-opt${fans[j]==="skip"?" picked":""}" id="skip-${j}">Skip this one</button>`}
+    </div>
+    <div class="row"><button class="link" id="back">Back</button></div>`;
+  app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+    fans[j]=+b.dataset.k;
+    app.querySelectorAll(".opt").forEach(x=>x.classList.remove("picked"));
+    b.classList.add("picked");
+    setTimeout(fnext,220);
+  });
+  const sk=document.getElementById("skip-"+j);
+  if(sk) sk.onclick=()=>{fans[j]="skip";fnext();};
+  document.getElementById("back").onclick=()=>{ if(j>0){j--;fquestion();} else partTwo(); };
+  window.scrollTo(0,0);
+}
+
+/* ---------- Scoring ---------- */
+function level(r){
+  if(r>=0.83) return "At peace";
+  if(r>=0.58) return "Mostly free";
+  if(r>=0.33) return "Often caught";
+  return "Weighed down";
+}
+
+// Part One: score comes from the response type of the chosen option.
+function computeDaily(){
+  const out={};
+  ORDER.forEach(v=>{
+    let sum=0, answered=0, skipped=0;
+    QUESTIONS.forEach((q,k)=>{
+      if(q.v!==v||q.check) return;
+      if(answers[k]==="none"||answers[k]===null){skipped++;return;}
+      sum+=TYPE_SCORE[q.o[answers[k]][1]]; answered++;
+    });
+    out[v] = (skipped>=2||!answered) ? null : sum/(answered*3);
+  });
+  return out;
+}
+
+// Part Two: "+" items Always = 3; "-" items reversed.
+function computeMind(){
+  const out={};
+  ORDER.forEach(v=>{
+    let sum=0, answered=0, n=0;
+    FAITH.forEach((q,k)=>{
+      if(q.v!==v||q.cost||q.honesty) return;
+      n++;
+      if(fans[k]===null||fans[k]==="skip") return;
+      sum += q.k==="+" ? fans[k] : 3-fans[k]; answered++;
+    });
+    out[v] = (answered && answered>=Math.ceil(n*3/4)) ? sum/(answered*3) : null;
+  });
+  return out;
+}
+
+function computePattern(){
+  const c={R:0,S:0,V:0};
+  QUESTIONS.forEach((q,k)=>{
+    if(q.check||answers[k]===null||answers[k]==="none") return;
+    const t=q.o[answers[k]][1];
+    if(c[t]!==undefined) c[t]++;
+  });
+  const total=c.R+c.S+c.V;
+  if(total<3) return {none:true,c};
+  const max=Math.max(c.R,c.S,c.V);
+  return {none:false,c,top:["R","S","V"].filter(t=>c[t]===max)};
+}
+
+function computeCost(){
+  let sum=0, answered=0;
+  FAITH.forEach((q,k)=>{
+    if(!q.cost||fans[k]===null||fans[k]==="skip") return;
+    sum+=fans[k]; answered++;
+  });
+  return answered>=3 ? sum/answered : null;
+}
+
+/* ---------- Result ---------- */
+function result(){
+  const daily = computeDaily();
+  const mind = computeMind();
+  const comb = {};
+  ORDER.forEach(v=>{
+    const parts=[daily[v],mind[v]].filter(x=>x!==null);
+    comb[v] = parts.length ? parts.reduce((a,b)=>a+b,0)/parts.length : null;
+  });
+  const scored = ORDER.filter(v=>comb[v]!==null);
+  let strong=null, grow=null;
+  if(scored.length){
+    strong=scored.reduce((a,b)=>comb[b]>comb[a]?b:a);
+    grow=scored.reduce((a,b)=>comb[b]<comb[a]?b:a);
+  }
+  const balanced = !scored.length || comb[strong]===comb[grow];
+  const strongIsGift = strong && [daily[strong],mind[strong]].every(x=>x!==null&&x>=0.58);
+
+  // Honesty check
+  const yesCount = FAITH.reduce((n,q,k)=>n+(q.honesty&&fans[k]===0?1:0),0);
+  const honestyCard = yesCount>=2 ? `
+    <div class="card">
+      <span class="pill gold">A gentle word</span>
+      <h2>No one's mind is always still</h2>
+      <p>Everyone worries sometimes, replays a conversation, or doubts a choice. That is part of being human, and the Lord does not ask us to pretend otherwise. You may want to read your answers again slowly, with simple honesty before him.</p>
+      <p class="verse">When the cares of my heart are many, your consolations cheer my soul.<cite>Psalm 94:19</cite></p>
+    </div>` : "";
+
+  // Cost
+  const cost = computeCost();
+  const helpers = who==="rel" ? "your spiritual director or your superior" : "a priest or a trusted friend";
+  const costCard = (cost!==null && cost>=2) ? `
+    <div class="card">
+      <span class="pill gold">A word of care</span>
+      <h2>You do not have to carry this alone</h2>
+      <p>Your thoughts seem to be costing you sleep, rest or peace. Please share this with someone who can walk with you: ${helpers}, or a counsellor or doctor. Asking for help is part of trusting God, not a lack of it.</p>
+      <p class="verse">Come to me, all who labour and are heavy laden, and I will give you rest.<cite>Matthew 11:28</cite></p>
+    </div>` : "";
+
+  // Someone to tell (unscored)
+  const ci = QUESTIONS.findIndex(q=>q.check);
+  const told = answers[ci];
+  let toldCard = "";
+  if(told===2||told===3){
+    toldCard = `
+    <div class="card">
+      <span class="pill gold">A word for you</span>
+      <h2>Two are better than one</h2>
+      <p>It is hard to carry a busy mind alone. Think of one person you could tell, even a little, when your thoughts will not stop. Sharing a burden often makes it lighter, and the Lord often comes to us through another person.</p>
+      <p class="verse">For if they fall, one will lift up his fellow.<cite>Ecclesiastes 4:10</cite></p>
+    </div>`;
+  } else if(told===1){
+    toldCard = `
+    <div class="card">
+      <span class="pill">A word for you</span>
+      <h2>Someone to tell</h2>
+      <p>You sometimes have someone to share your thoughts with. Thank God for them. You might let them know how much it helps.</p>
+    </div>`;
+  }
+
+  // Pattern
+  const pat = computePattern();
+  let patCard;
+  if(pat.none){
+    patCard = `
+    <div class="card">
+      <span class="pill">How your mind responds</span>
+      <h2>Mostly free</h2>
+      <p>In the situations you answered, your mind seems mostly free of replaying, seeking certainty and stepping back. Thank God for this.</p>
+    </div>`;
+  } else {
+    patCard = pat.top.map(t=>{
+      const p=PATTERNS[t];
+      return `
+    <div class="card">
+      <span class="pill">How your mind responds</span>
+      <h2>${p.name}</h2>
+      <p>${p.desc}</p>
+      <p class="verse">${p.verse}<cite>${p.ref}</cite></p>
+      <h3>Small steps</h3>
+      <ul class="plain">${p.steps.map(x=>`<li>${esc(T(x))}</li>`).join("")}</ul>
+    </div>`;}).join("");
+  }
+
+  const own = QUESTIONS.map((q,k)=>({q:T(q.q),n:notes[k]})).filter((x,k)=>answers[k]==="none"&&x.n);
+
+  let middle;
+  if(!scored.length){
+    middle = `
+    <div class="card">
+      <span class="pill">A quiet invitation</span>
+      <h2>Stay with these questions</h2>
+      <p>You found it hard to place yourself in many of these situations. That is all right. Go back to the questions that touched you most and stay with them in prayer.</p>
+    </div>`;
+  } else if(balanced){
+    middle = `
+    <div class="card">
+      <span class="pill">Your mind before God</span>
+      <h2>A balanced picture</h2>
+      <p>Your answers are balanced across the areas you answered. Thank the Lord for this, and pray with the one area you feel most drawn to look at more closely.</p>
+    </div>`;
+  } else {
+    const s=AREAS[strong], g=AREAS[grow];
+    let which="";
+    if(daily[grow]!==null&&mind[grow]!==null){
+      if(mind[grow] < daily[grow]-0.15) which = `<p>Much of the pressure here is inside you, even when you seem to cope well outwardly.</p>`;
+      else if(daily[grow] < mind[grow]-0.15) which = `<p>In this area, your thinking is starting to shape how you act and relate to others.</p>`;
+    }
+    middle = (strongIsGift ? `
+    <div class="card">
+      <span class="pill">A gift to give thanks for</span>
+      <h2>${s.name}</h2>
+      <p>${esc(T(s.gift))}</p>
+      <p class="verse">I have calmed and quieted my soul, like a child quieted at its mother's breast.<cite>Psalm 131:2</cite></p>
+    </div>` : "") + `
+    <div class="card">
+      <span class="pill gold">An invitation to grow</span>
+      <h2>${g.name}</h2>
+      <p>${esc(T(g.grow))}</p>
+      ${which}
+      <p class="verse">${g.verse}<cite>${g.ref}</cite></p>
+      <h3>Take this question into prayer</h3>
+      <p>${esc(g.question)}</p>
+      <h3>Small steps for the coming weeks</h3>
+      <ul class="plain">${g.steps.map(x=>`<li>${esc(T(x))}</li>`).join("")}</ul>
+    </div>`;
+  }
+
+  const row = (label, r, gold, msg) => r===null ? `
+          <div class="sub">
+            <div class="sub-head"><span>${label}</span></div>
+            <p class="unscored">${msg}</p>
+          </div>` : `
+          <div class="sub">
+            <div class="sub-head"><span>${label}</span><span>${level(r)}</span></div>
+            <div class="bar${gold?" gold":""}"><i style="width:${Math.max(4,Math.round(r*100))}%"></i></div>
+          </div>`;
+
+  app.innerHTML = `
+    <div class="card">
+      <span class="eyebrow">Your reflection</span>
+      <h1>Where your mind finds peace</h1>
+      <p>Read this slowly. It is not a judgement or a diagnosis. It is only a light on where you are today.</p>
+      <p class="note">For each area, the first mark shows what you do in daily life (Part One). The second shows what happens in your mind (Part Two). A longer bar means more freedom.</p>
+      <div class="bars">${ORDER.map(v=>{
+        const g = v===grow&&!balanced;
+        return `
+        <div class="area">
+          <b class="area-name">${AREAS[v].name}</b>
+          ${row("In daily life", daily[v], g, "You found it hard to place yourself in these situations. Stay with this area in prayer.")}
+          ${row("In my mind", mind[v], g, "You skipped several statements here. Stay with this area in prayer.")}
+        </div>`;}).join("")}</div>
+    </div>
+
+    ${honestyCard}
+
+    ${middle}
+
+    ${patCard}
+
+    ${costCard}
+
+    ${toldCard}
+
+    ${own.length?`
+    <div class="card">
+      <span class="eyebrow">In your own words</span>
+      <h2>What you wrote</h2>
+      <div class="words">${own.map(x=>`<div><span class="q">${esc(x.q)}</span><span class="a">${esc(x.n)}</span></div>`).join("")}</div>
+      <p class="note">Read these again slowly. They may say more than any of the answers.</p>
+    </div>`:""}
+
+    <div class="card">
+      <span class="eyebrow">Before you go</span>
+      <h2>My intention</h2>
+      <div class="field"><label for="in-go">This month, I will let go of...</label><textarea id="in-go" placeholder="for example, replaying conversations at night"></textarea></div>
+      <div class="field"><label for="in-step">One small step I will take...</label><textarea id="in-step" placeholder="for example, a short prayer before sleep, handing the day to God"></textarea></div>
+      <div class="row"><button class="btn" id="copy">Copy my intention</button><span class="toast" id="toast" hidden></span></div>
+      <p class="note">Copy it into your notes or keep it in your Bible. It is saved only on this phone.</p>
+    </div>
+
+    <p class="verse">Peace I leave with you; my peace I give to you... Let not your hearts be troubled.<cite>John 14:27</cite></p>
+    <div class="row"><button class="btn ghost" id="again">Begin again</button><button class="link" id="review">Review my answers</button></div>
+    <div class="card clear-card">
+      <h3>When you have finished</h3>
+      <p class="note">If others may use this phone, clear your answers and your written intention.</p>
+      <button class="btn ghost" id="clear">Clear my answers</button>
+    </div>`;
+
+  ["go","step"].forEach(k=>{
+    const t=document.getElementById("in-"+k);
+    t.value=store.get("qtm-"+k)||"";
+    t.oninput=()=>store.set("qtm-"+k,t.value);
+  });
+  document.getElementById("copy").onclick=()=>{
+    const v=k=>document.getElementById("in-"+k).value.trim()||"...";
+    const text=`Lord, this month I will let go of ${v("go")}. One small step I will take is ${v("step")}. Give me your peace. Amen.`;
+    const toast=document.getElementById("toast");
+    const done=m=>{toast.textContent=m;toast.hidden=false;};
+    try{
+      navigator.clipboard.writeText(text).then(()=>done("Copied"),()=>{done("Select the text below to copy");fallback(text);});
+    }catch(e){done("Select the text below to copy");fallback(text);}
+  };
+  const reset=()=>{answers.fill(null);notes.fill("");fans.fill(null);i=0;j=0;who=null;church=null;};
+  document.getElementById("again").onclick=()=>{reset();intro();};
+  document.getElementById("review").onclick=()=>{i=0;question();};
+  document.getElementById("clear").onclick=()=>{
+    reset();
+    ["go","step"].forEach(k=>store.del("qtm-"+k));
+    intro("Your answers and your intention have been cleared from this phone.");
+  };
+  window.scrollTo(0,0);
+}
+
+function fallback(text){
+  let box=document.getElementById("copybox");
+  if(!box){box=document.createElement("textarea");box.id="copybox";box.readOnly=true;document.getElementById("copy").closest(".card").appendChild(box);}
+  box.value=text;box.focus();box.select();
+}
+
+intro();
+</script>
+</body>
+</html>
