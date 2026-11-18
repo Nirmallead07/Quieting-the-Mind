@@ -1,12 +1,12 @@
 # Quieting the Mind
 
-A short reflection on overthinking for religious sisters and lay people: how the mind replays the past, worries about the future, doubts decisions, reads other people, and judges itself. It is a companion to [Living My Vows](https://nirmallead07.github.io/living-my-vows/).
+A short reflection on overthinking, open to everyone: lay people, religious and clergy alike. It looks at how the mind replays the past, worries about the future, doubts decisions, reads other people, and judges itself. It is a companion to [Living My Vows](https://nirmallead07.github.io/living-my-vows/).
 
 Prepared by Fr. Solomon Anthony Nirmalan, CMF.
 
 ## About the tool
 
-At the start, the person chooses whether they are a religious sister or a lay person, and lay people choose Catholic or another Christian church. The situations are then worded to fit their life. Scoring is the same for everyone.
+Everyone answers the same items. The situations give examples from home, work, parish and religious community life together, such as "someone in authority over you, such as a boss, a priest or a superior", so that no one has to choose a group.
 
 **Part One: In daily life.** Twenty everyday situations, four in each of five areas: the past, the future, decisions, other people, and conscience. Each option reflects one kind of response: constructive thinking (3), normal reflection (2), repetitive thinking (1), reassurance-seeking or checking (0), or avoidance (0). Careful preparation, prayer and asking one trusted person for advice count as healthy. The order of options is shuffled on every visit. One further question, about having someone to talk to, is not scored.
 

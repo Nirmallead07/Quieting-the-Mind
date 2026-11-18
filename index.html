@@ -100,17 +100,8 @@ textarea{font:inherit;width:100%;box-sizing:border-box;min-height:64px;border:1p
 <footer class="credit">Prepared by <b>Fr. Solomon Anthony Nirmalan, CMF</b></footer>
 
 <script>
-/* ---------- Who is answering ---------- */
-let who = null;     // "rel" (religious sister) or "lay"
-let church = null;  // "cath" or "other"
-
-// A text can be a plain string, {r, l} for religious/lay, or {c, o} for Catholic/other Christian.
-function T(x){
-  if(typeof x==="string") return x;
-  if(x.r!==undefined || x.l!==undefined) return T(who==="rel" ? x.r : x.l);
-  if(x.c!==undefined || x.o!==undefined) return T(church==="other" ? x.o : x.c);
-  return "";
-}
+/* ---------- Text helper ---------- */
+function T(x){ return String(x); }
 
 /* ---------- Areas ---------- */
 const ORDER = ["A","B","C","D","E"];
@@ -122,8 +113,7 @@ const AREAS = {
      question:"What am I still carrying that the Lord has already made new?",
      steps:[
        "When a replay begins, ask \"What is one thing I can do about this now?\" instead of \"Why did this happen?\"",
-       {r:"When it comes during the day, tell yourself \"not now\" and save it for the evening Examen.",
-        l:"When it comes during the day, tell yourself \"not now\" and save it for a short prayer at the end of the day."},
+       "When it comes during the day, tell yourself \"not now\" and save it for a short prayer at the end of the day, such as the Examen.",
        "At the end of that prayer, write down one thing you are handing over to God, and close the notebook."]},
   B:{name:"Trusting tomorrow", tag:"The future",
      verse:"Do not be anxious about tomorrow, for tomorrow will be anxious for itself. Let the day's own trouble be sufficient for the day.", ref:"Matthew 6:34",
@@ -145,8 +135,7 @@ const AREAS = {
        "For big decisions, follow St Ignatius: do not reverse a decision made in peace during a time of desolation."]},
   D:{name:"Reading hearts gently", tag:"Other people",
      verse:"Love bears all things, believes all things, hopes all things, endures all things.", ref:"1 Corinthians 13:7",
-     gift:{r:"You seem to give others the benefit of the doubt. Thank God for this generous way of seeing, which makes community life lighter.",
-           l:"You seem to give others the benefit of the doubt. Thank God for this generous way of seeing, which makes family and work life lighter."},
+     gift:"You seem to give others the benefit of the doubt. Thank God for this generous way of seeing, which makes life together lighter, at home, at work and in community.",
      grow:"The Lord may be inviting you to stop guessing what others think, and to ask simply, or to trust.",
      question:"Whose words or silence have I been interpreting without asking?",
      steps:[
@@ -159,11 +148,9 @@ const AREAS = {
      grow:"The Lord may be inviting you to let his mercy be enough, and to treat yourself with the patience he shows you.",
      question:"Do I believe God's mercy is bigger than my doubts?",
      steps:[
-       {c:"Keep one regular confessor and follow his guidance rather than your own doubts.",
-        o:"Keep one pastor or mentor you trust, and follow their guidance rather than your own doubts."},
+       "Keep one regular confessor or spiritual guide, and follow their guidance rather than your own doubts.",
        "If you are not sure something was a sin, treat it as not a sin.",
-       {r:"Speak to yourself as you would speak to a younger sister who made the same slip.",
-        l:"Speak to yourself as you would speak to a good friend who made the same slip."}]}
+       "Speak to yourself as you would speak to a good friend who made the same slip."]}
 };
 
 /* ---------- Response types ---------- */
@@ -191,14 +178,12 @@ const PATTERNS = {
 /* ---------- Part One: situations ---------- */
 const QUESTIONS = [
   // A. The past
-  {v:"A", q:{r:"At recreation you made a joke, and one sister looked hurt. That night, what do you do?",
-             l:"At a family gathering you made a joke, and one person looked hurt. That night, what do you do?"}, o:[
-    [{r:"I decide to have a quiet word with her tomorrow, and then I sleep.", l:"I decide to have a quiet word with them tomorrow, and then I sleep."},"C"],
+  {v:"A", q:"At a gathering with family, friends or your community, you made a joke and one person looked hurt. That night, what do you do?", o:[
+    ["I decide to have a quiet word with them tomorrow, and then I sleep.","C"],
     ["I feel uneasy for a while and think about what I said, then it settles.","N"],
-    [{r:"I lie awake going over her face and what I should have said instead.", l:"I lie awake going over their face and what I should have said instead."},"R"],
-    [{r:"I feel so awkward that I keep away from her for the next few days.", l:"I feel so awkward that I keep away from them for the next few days."},"V"]]},
-  {v:"A", q:{r:"In a community meeting, an idea you cared about was turned down. Over the next few days, what do you do?",
-             l:"In a meeting at work or in the parish, an idea you cared about was turned down. Over the next few days, what do you do?"}, o:[
+    ["I lie awake going over their face and what I should have said instead.","R"],
+    ["I feel so awkward that I keep away from them for the next few days.","V"]]},
+  {v:"A", q:"In a meeting at work, in your parish or in your community, an idea you cared about was turned down. Over the next few days, what do you do?", o:[
     ["I ask myself honestly whether there is something to learn, and then I move on.","C"],
     ["I feel disappointed for a day or two, and then it passes.","N"],
     ["I keep rehearsing what I said and what I will say next time.","R"],
@@ -208,15 +193,13 @@ const QUESTIONS = [
     ["I feel a sting, say a short prayer, and let it pass.","N"],
     ["I go back into the whole story and feel the shame again as if it were new.","R"],
     ["I quickly busy myself or reach for my phone so I don't have to feel it.","V"]]},
-  {v:"A", q:{r:"A sister apologises for something that hurt you. What do you do?",
-             l:"A friend or family member apologises for something that hurt you. What do you do?"}, o:[
+  {v:"A", q:"Someone close to you apologises for something that hurt you. What do you do?", o:[
     ["I accept the apology and let the matter rest.","C"],
     ["I forgive, though the memory still comes back now and then.","N"],
     ["I keep asking others whether I was right to feel so hurt.","S"],
     ["I say I forgive, but I keep my distance so it can't happen again.","V"]]},
   // B. The future
-  {v:"B", q:{r:"You are told that next year you will take charge of a school. What do you do?",
-             l:"You are told that next month you will lead a new team or project at work. What do you do?"}, o:[
+  {v:"B", q:"You are given a new responsibility, such as leading a team, a project or an institution, starting soon. What do you do?", o:[
     ["I make a simple plan, ask someone experienced for advice, and take one step at a time.","C"],
     ["I feel anxious at first, and it settles as I start to prepare.","N"],
     ["I picture everything that could go wrong, and it fills my nights.","R"],
@@ -226,34 +209,29 @@ const QUESTIONS = [
     ["I feel concerned and pray often, but I still manage my daily work.","N"],
     ["I keep imagining the worst result, as if it had already happened.","R"],
     ["I search the internet again and again for what the results might mean.","S"]]},
-  {v:"B", q:{r:"Tomorrow is the provincial's visitation, and you have prepared well. What do you do the night before?",
-             l:"Tomorrow you have a job interview, an exam or an important presentation, and you have prepared well. What do you do the night before?"}, o:[
+  {v:"B", q:"Tomorrow you have something important, such as an interview, an exam, a presentation or an official visit, and you have prepared well. What do you do the night before?", o:[
     ["I go through the main points once more, and then I rest.","C"],
     ["I feel nervous, remind myself that I am prepared, and sleep.","N"],
     ["I get up again and again to check details that are already in order.","S"],
     ["I can't bring myself to look at it, and I scroll on my phone until late.","V"]]},
-  {v:"B", q:{r:"The superior says, \"Please come and see me tomorrow,\" and gives no reason. What do you do?",
-             l:"Your boss says, \"Please come and see me tomorrow,\" and gives no reason. What do you do?"}, o:[
+  {v:"B", q:"Someone in authority over you, such as a boss or a superior, says, \"Please come and see me tomorrow,\" and gives no reason. What do you do?", o:[
     ["I wonder briefly what it is about, and carry on with my evening.","C"],
     ["I think through one or two possible reasons, and then leave it.","N"],
     ["I spend the evening going over everything I might have done wrong.","R"],
-    [{r:"I ask a sister several times what she thinks it might be about.", l:"I ask a colleague several times what they think it might be about."},"S"]]},
+    ["I ask someone several times what they think it might be about.","S"]]},
   // C. Decisions
-  {v:"C", q:{r:"You need a small gift for a sister's jubilee. What do you do?",
-             l:"You need a small birthday gift for a friend. What do you do?"}, o:[
-    [{r:"I choose something I think she will like, and that is that.", l:"I choose something I think they will like, and that is that."},"C"],
+  {v:"C", q:"You need a small gift for a friend or someone you live with, for a birthday or a celebration. What do you do?", o:[
+    ["I choose something I think they will like, and that is that.","C"],
     ["I compare a few things for a while, and then decide.","N"],
-    [{r:"I keep asking different sisters which one to buy.", l:"I keep asking different friends which one to buy."},"S"],
+    ["I keep asking different people which one to buy.","S"],
     ["I keep putting it off until it is too late to choose well.","V"]]},
-  {v:"C", q:{r:"You need to reply to a delicate message from a parent at the school. What do you do?",
-             l:"You need to reply to a delicate message from a colleague or a relative. What do you do?"}, o:[
+  {v:"C", q:"You need to reply to a delicate message from a colleague, a relative or someone you serve. What do you do?", o:[
     ["I write it carefully, ask one person I trust to read it, and send it.","C"],
     ["I write it, read it through once or twice, and send it.","N"],
     ["I rewrite it many times, asking different people, and still feel unsure.","S"],
     ["I keep leaving the reply for later, because I'm afraid of saying the wrong thing.","V"]]},
-  {v:"C", q:{r:"You are offered a choice between two missions, and you have two weeks to decide. What do you do?",
-             l:"You must choose between two jobs, two courses or two places to live, and you have two weeks to decide. What do you do?"}, o:[
-    [{r:"I pray, talk it over with my spiritual director, and decide within the time.", l:"I pray, talk it over with someone wise I trust, and decide within the time."},"C"],
+  {v:"C", q:"You must choose between two options, such as two jobs, two courses, two places or two assignments, and you have two weeks to decide. What do you do?", o:[
+    ["I pray, talk it over with someone wise I trust, and decide within the time.","C"],
     ["I need most of the two weeks, but I decide and feel at peace.","N"],
     ["I make long lists, go round in circles, and doubt whichever way I lean.","R"],
     ["I keep waiting for a clearer sign until the deadline passes or someone decides for me.","V"]]},
@@ -263,52 +241,43 @@ const QUESTIONS = [
     ["I keep wondering whether the other option would have been better.","R"],
     ["I keep asking people whether I made the right choice.","S"]]},
   // D. Other people
-  {v:"D", q:{r:"A sister passes you in the corridor without greeting you. What do you do?",
-             l:"A colleague or neighbour passes you without greeting you. What do you do?"}, o:[
-    [{r:"I assume she is busy or has something on her mind.", l:"I assume they are busy or have something on their mind."},"C"],
+  {v:"D", q:"Someone you live or work with passes you without greeting you. What do you do?", o:[
+    ["I assume they are busy or have something on their mind.","C"],
     ["I wonder for a moment if I did something, then let it go.","N"],
     ["I spend the day trying to work out what I did wrong.","R"],
-    [{r:"I ask someone else whether she is upset with me.", l:"I ask someone else whether that person is upset with me."},"S"]]},
+    ["I ask someone else whether that person is upset with me.","S"]]},
   {v:"D", q:"A message you sent shows \"seen\", but there is no reply after several hours. What do you do?", o:[
     ["I assume the person is busy and get on with my day.","C"],
     ["I feel a little uneasy, but I carry on with my work.","N"],
     ["I read my message again and again, looking for what was wrong in it.","R"],
     ["I hold back from contacting that person again until they reach out first.","V"]]},
-  {v:"D", q:{r:"You had a short conversation with the parish priest about your work. Afterwards, what do you do?",
-             l:"You had a short conversation with your boss, or an elder in the family, about something you did. Afterwards, what do you do?"}, o:[
+  {v:"D", q:"You had a short conversation with someone in authority, such as a boss, a priest or a superior, about something you did. Afterwards, what do you do?", o:[
     ["I take the words as they were said.","C"],
     ["I think over one or two points that matter, and then leave it.","N"],
     ["I replay the words and the tone, looking for what was really meant.","R"],
-    [{r:"I ask a sister what she thinks was really meant.", l:"I ask someone what they think was really meant."},"S"]]},
-  {v:"D", q:{r:"You gave the reflection at community prayer. Afterwards, what do you do?",
-             l:"You gave a presentation at work or a short speech at a family event. Afterwards, what do you do?"}, o:[
+    ["I ask someone what they think was really meant.","S"]]},
+  {v:"D", q:"You spoke in front of others, such as a presentation at work, a speech at a family event or a reflection at prayer. Afterwards, what do you do?", o:[
     ["I leave it there, perhaps noting one thing to do better next time.","C"],
     ["I ask one person how it went, and accept what they say.","N"],
     ["I keep asking different people whether it was alright.","S"],
     ["I decide to avoid speaking in front of others next time if I can.","V"]]},
   // E. Conscience
-  {v:"E", q:{c:"Some days after Confession, a sin you have already confessed comes back to your mind. What do you do?",
-             o:"Some days after asking God's forgiveness for something, it comes back to your mind. What do you do?"}, o:[
+  {v:"E", q:"Some days after Confession, or after asking God's forgiveness, something you have already confessed comes back to your mind. What do you do?", o:[
     ["I remember that it has been forgiven, thank God, and carry on with my day.","C"],
     ["I feel some regret, and it reminds me to take care in that area.","N"],
     ["I go over it again and wonder whether I explained it properly.","R"],
-    [{c:"I can't feel at peace until I confess it again or ask a priest whether I am truly forgiven.",
-      o:"I can't feel at peace until I ask God again, or ask someone, whether I am truly forgiven."},"S"]]},
-  {v:"E", q:{c:"During Mass or personal prayer, an unwanted or embarrassing thought comes into your mind. What do you do?",
-             o:"During worship or personal prayer, an unwanted or embarrassing thought comes into your mind. What do you do?"}, o:[
+    ["I can't feel at peace until I confess it again, or ask someone whether I am truly forgiven.","S"]]},
+  {v:"E", q:"During Mass, worship or personal prayer, an unwanted or embarrassing thought comes into your mind. What do you do?", o:[
     ["I notice it, let it pass, and bring my attention back as often as needed.","C"],
     ["I feel a little unsettled, and it takes a moment to settle back into prayer.","N"],
     ["I try hard to push it out, but it keeps coming back and I lose my prayer.","R"],
-    [{c:"I worry that having such a thought is a sin, and feel I must confess it.",
-      o:"I worry that having such a thought is a sin, and feel I must ask forgiveness for it again and again."},"S"]]},
-  {v:"E", q:{r:"You spoke impatiently to a student or a sister. Afterwards, what do you do?",
-             l:"You spoke impatiently to your child, your spouse or a co-worker. Afterwards, what do you do?"}, o:[
+    ["I worry that having such a thought is a sin, and feel I must confess it or ask forgiveness for it.","S"]]},
+  {v:"E", q:"You spoke impatiently to someone close to you, such as a family member, a co-worker or someone you live with. Afterwards, what do you do?", o:[
     ["I admit I was impatient, apologise, and think how to handle it better next time.","C"],
     ["I feel bad about it that evening, and make a point of being kind the next day.","N"],
     ["I keep asking myself why I behaved like that and what kind of person I am.","R"],
     ["I feel so ashamed that I avoid that person for a while instead of facing them.","V"]]},
-  {v:"E", q:{r:"You have finished the monthly accounts, and they balance. It is late. What do you do?",
-             l:"You have finished the household budget or a report for work, and the figures add up. It is late. What do you do?"}, o:[
+  {v:"E", q:"You have finished the accounts, a budget or a report, and the figures add up. It is late. What do you do?", o:[
     ["I check the totals once and put it away.","C"],
     ["I go over a few entries again, then stop and rest.","N"],
     ["I check it again and again in case I missed a mistake.","S"],
@@ -330,16 +299,16 @@ const FAITH = [
   {v:"B", q:"I picture the worst thing that could happen, even when it is unlikely.", k:"-"},
   {v:"C", q:"I ask others for reassurance about the same thing, even after they have already reassured me.", k:"-"},
   {v:"D", q:"I read hidden meanings into what people say, or don't say.", k:"-"},
-  {v:"E", q:{c:"I keep going back to whether a confession was complete.", o:"I keep going back to whether I have truly been forgiven."}, k:"-"},
+  {v:"E", q:"I keep going back to whether my confession or my prayer for forgiveness was complete.", k:"-"},
   {v:"A", q:"I ask myself \"Why did this happen?\" or \"Why am I like this?\" over and over.", k:"-"},
   {v:"B", q:"Worry stops me from enjoying good moments.", k:"-"},
   {v:"C", q:"Once I decide something, I can stay with it in peace.", k:"+"},
   {v:"D", q:"When someone seems upset, I ask them simply instead of guessing.", k:"+"},
-  {v:"E", q:{c:"I believe God has forgiven what I have confessed.", o:"I believe God has forgiven what I have asked forgiveness for."}, k:"+"},
+  {v:"E", q:"I believe God has forgiven what I have confessed or asked forgiveness for.", k:"+"},
   {v:"A", q:"I can put a past hurt into God's hands and leave it there.", k:"+"},
   {v:"B", q:"I can plan for the future without my mind running ahead to everything that could go wrong.", k:"+"},
   {v:"C", q:"I put off decisions or tasks because I am afraid of getting them wrong.", k:"-"},
-  {v:"D", q:{r:"I trust that my sisters wish me well, even when they are short with me.", l:"I trust that the people close to me wish me well, even when they are short with me."}, k:"+"},
+  {v:"D", q:"I trust that the people close to me wish me well, even when they are short with me.", k:"+"},
   {v:"E", q:"When something I do is not perfect, I feel I have failed.", k:"-"},
   // What it costs me (scored separately; higher = more cost)
   {cost:true, q:"My thoughts keep me from falling asleep, or wake me at night."},
@@ -396,7 +365,7 @@ function intro(msg){
     <details class="about">
       <summary>About this reflection</summary>
       <div class="about-body">
-        <p>Quieting the Mind is a companion to Living My Vows. It looks at five places where overthinking often shows up: going over the past, worrying about the future, doubting decisions, guessing what other people think, and judging ourselves too harshly.</p>
+        <p>Quieting the Mind is a companion to Living My Vows. It looks at five places where overthinking often shows up: going over the past, worrying about the future, doubting decisions, guessing what other people think, and judging ourselves too harshly. It is written for everyone, at home, at work, in a parish or in a religious community, so the situations give examples from all of these.</p>
         <p>Thinking carefully, preparing well, praying and asking for advice are all healthy. They become overthinking only when they go on and on, are driven by distress, or get in the way of daily life. The situations and answers were written to respect that difference.</p>
         <p>At the end you see two marks for each area, one for what you do in daily life and one for what happens in your mind. You also see an area to give thanks for, an area where the Lord may be inviting you to grow, the way your overthinking usually shows itself, and a few small steps for the coming weeks.</p>
         <p>The reflection is not a validated psychological test, and its results should not be used to compare or evaluate people. If your thoughts are costing you sleep or peace, please speak with someone you trust, or with a counsellor or doctor. Nothing is sent anywhere. Your answers stay only on your own phone, and you can clear them when you finish.</p>
@@ -412,43 +381,7 @@ function intro(msg){
         <p class="langs">He is fluent in Tamil, Sinhala and English.</p>
       </div>
     </details>`;
-  document.getElementById("start").onclick = chooseWho;
-  window.scrollTo(0,0);
-}
-
-function chooseWho(){
-  app.innerHTML = `
-    <div class="card">
-      <span class="eyebrow">Before you begin</span>
-      <h2>Which describes you?</h2>
-      <p class="note">The situations will be worded to fit your life. The reflection is the same for everyone.</p>
-      <div class="opts">
-        <button class="opt${who==="rel"?" picked":""}" id="w-rel">I am a religious sister</button>
-        <button class="opt${who==="lay"?" picked":""}" id="w-lay">I am a lay person</button>
-      </div>
-    </div>
-    <div class="row"><button class="link" id="back">Back</button></div>`;
-  document.getElementById("w-rel").onclick=()=>{who="rel";church="cath";i=0;question();};
-  document.getElementById("w-lay").onclick=()=>{who="lay";chooseChurch();};
-  document.getElementById("back").onclick=()=>intro();
-  window.scrollTo(0,0);
-}
-
-function chooseChurch(){
-  app.innerHTML = `
-    <div class="card">
-      <span class="eyebrow">Before you begin</span>
-      <h2>Which describes you?</h2>
-      <p class="note">A few situations about prayer and forgiveness will be worded to fit your practice.</p>
-      <div class="opts">
-        <button class="opt${church==="cath"?" picked":""}" id="c-cath">I am Catholic</button>
-        <button class="opt${church==="other"?" picked":""}" id="c-other">I belong to another Christian church</button>
-      </div>
-    </div>
-    <div class="row"><button class="link" id="back">Back</button></div>`;
-  document.getElementById("c-cath").onclick=()=>{church="cath";i=0;question();};
-  document.getElementById("c-other").onclick=()=>{church="other";i=0;question();};
-  document.getElementById("back").onclick=chooseWho;
+  document.getElementById("start").onclick = ()=>{i=0;question();};
   window.scrollTo(0,0);
 }
 
@@ -497,8 +430,7 @@ function question(){
     };
   }
   document.getElementById("back").onclick=()=>{
-    if(i>0){i--;question();}
-    else if(who==="lay") chooseChurch(); else chooseWho();
+    if(i>0){i--;question();} else intro();
   };
   window.scrollTo(0,0);
 }
@@ -647,12 +579,11 @@ function result(){
 
   // Cost
   const cost = computeCost();
-  const helpers = who==="rel" ? "your spiritual director or your superior" : "a priest or a trusted friend";
   const costCard = (cost!==null && cost>=2) ? `
     <div class="card">
       <span class="pill gold">A word of care</span>
       <h2>You do not have to carry this alone</h2>
-      <p>Your thoughts seem to be costing you sleep, rest or peace. Please share this with someone who can walk with you: ${helpers}, or a counsellor or doctor. Asking for help is part of trusting God, not a lack of it.</p>
+      <p>Your thoughts seem to be costing you sleep, rest or peace. Please share this with someone who can walk with you: a priest, a spiritual director, a superior or a trusted friend, or a counsellor or doctor. Asking for help is part of trusting God, not a lack of it.</p>
       <p class="verse">Come to me, all who labour and are heavy laden, and I will give you rest.<cite>Matthew 11:28</cite></p>
     </div>` : "";
 
@@ -820,7 +751,7 @@ function result(){
       navigator.clipboard.writeText(text).then(()=>done("Copied"),()=>{done("Select the text below to copy");fallback(text);});
     }catch(e){done("Select the text below to copy");fallback(text);}
   };
-  const reset=()=>{answers.fill(null);notes.fill("");fans.fill(null);i=0;j=0;who=null;church=null;};
+  const reset=()=>{answers.fill(null);notes.fill("");fans.fill(null);i=0;j=0;};
   document.getElementById("again").onclick=()=>{reset();intro();};
   document.getElementById("review").onclick=()=>{i=0;question();};
   document.getElementById("clear").onclick=()=>{
